@@ -115,7 +115,7 @@ async function detectParts(shapes){
     if(best)parent.set(inn.id,best.id);
     if(i%30===29)await nextFrame();
   }
-  const by=new Map(cs.map(x=>[x.id,x]);
+  const by=new Map(cs.map(x=>[x.id,x]));
   const rootOf=id=>{const seen=new Set();while(parent.has(id)&&!seen.has(id)){seen.add(id);id=parent.get(id)}return id};
   const groups=new Map();
   for(const c of cs){const r=rootOf(c.id);if(!groups.has(r))groups.set(r,[]);groups.get(r).push(c)}
