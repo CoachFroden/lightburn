@@ -13,7 +13,7 @@
       <h1>LightBurn Nest</h1>
       <p class="subtitle">Les .lbrn2-filer, finn fysiske deler og prøv en tettere plassering før kutting.</p>
     </div>
-    <span class="version">Prototype v0.1</span>
+    <span class="version">Prototype v0.2</span>
   </header>
 
   <main class="layout">
@@ -82,11 +82,13 @@
       </div>
 
       <div class="notice">
-        <strong>Om prototypen:</strong> Deler oppdages ved å analysere lukkede konturer og hvilke konturer som ligger inni andre. Nestingen er en geometrisk heuristikk og er ikke garantert å være det globale optimumet. Eksport tilbake til .lbrn2 kommer i neste steg.
+        <strong>Om prototypen:</strong> Versjon 0.2 bruker LightBurn-grupper som første signal for hvilke konturer som hører til samme fysiske del. Ugrupperte objekter analyseres geometrisk. Plasseringen bruker foreløpig en stabil rektangel-nesting; ekte kontur-nesting kommer senere.
       </div>
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <script src="v2-core.js"></script>
+  <script src="v2-nest.js"></script>
+  <script src="v2-ui.js"></script>
 </body>
 </html>
