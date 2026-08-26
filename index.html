@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LightBurn Nest</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">LIGHTBURN MATERIALOPTIMALISERING</p>
+      <h1>LightBurn Nest</h1>
+      <p class="subtitle">Les .lbrn2-filer, finn fysiske deler og prøv en tettere plassering før kutting.</p>
+    </div>
+    <span class="version">Prototype v0.1</span>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls">
+      <section>
+        <h2>1. Åpne LightBurn-fil</h2>
+        <label class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept=".lbrn2,.lbrn,application/xml,text/xml" />
+          <strong>Velg eller slipp en .lbrn2-fil her</strong>
+          <span>Filen behandles lokalt i nettleseren.</span>
+        </label>
+        <div id="fileMeta" class="file-meta muted">Ingen fil valgt.</div>
+      </section>
+
+      <section>
+        <h2>2. Materiale</h2>
+        <div class="field-grid">
+          <label>Bredde (mm)<input id="sheetWidth" type="number" min="10" step="1" value="400" /></label>
+          <label>Høyde (mm)<input id="sheetHeight" type="number" min="10" step="1" value="400" /></label>
+          <label>Kantmargin (mm)<input id="margin" type="number" min="0" step="0.5" value="3" /></label>
+          <label>Mellomrom (mm)<input id="gap" type="number" min="0" step="0.5" value="2" /></label>
+        </div>
+        <label class="check"><input id="allowRotate" type="checkbox" checked /> Tillat 90° rotasjon</label>
+      </section>
+
+      <section class="button-stack">
+        <button id="analyzeBtn" class="primary" disabled>Analyser deler</button>
+        <button id="nestBtn" disabled>Finn plassering</button>
+        <button id="resetBtn" class="ghost" disabled>Vis original</button>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Oppdagede deler</h2>
+          <span id="partCount" class="pill">0</span>
+        </div>
+        <div id="partsList" class="parts-list muted">Analyser en fil for å se delene.</div>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="stats" id="stats">
+        <article><span>Shapes</span><strong id="shapeStat">–</strong></article>
+        <article><span>Aktive konturer</span><strong id="contourStat">–</strong></article>
+        <article><span>Deler</span><strong id="partsStat">–</strong></article>
+        <article><span>Plater</span><strong id="sheetsStat">–</strong></article>
+        <article><span>Est. utnyttelse</span><strong id="usageStat">–</strong></article>
+      </div>
+
+      <div class="canvas-card">
+        <div class="canvas-toolbar">
+          <div>
+            <strong id="viewTitle">Forhåndsvisning</strong>
+            <span id="viewNote" class="muted">Last inn en LightBurn-fil for å begynne.</span>
+          </div>
+          <div class="legend">
+            <span><i class="swatch outer"></i> Ytre del</span>
+            <span><i class="swatch inner"></i> Innvendig kutt</span>
+            <span><i class="swatch inactive"></i> Ikke-output</span>
+          </div>
+        </div>
+        <div class="svg-wrap" id="svgWrap">
+          <svg id="preview" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LightBurn forhåndsvisning"></svg>
+          <div id="emptyState" class="empty-state">Slipp en <strong>.lbrn2</strong>-fil her for å se geometrien.</div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>Om prototypen:</strong> Deler oppdages ved å analysere lukkede konturer og hvilke konturer som ligger inni andre. Nestingen er en geometrisk heuristikk og er ikke garantert å være det globale optimumet. Eksport tilbake til .lbrn2 kommer i neste steg.
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
